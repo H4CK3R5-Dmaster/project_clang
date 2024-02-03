@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <sys/stat.h>
 
 #define EXT_ENCRYPTED ".3ncrypt3d"
 #define EXT_LENGHT 10

