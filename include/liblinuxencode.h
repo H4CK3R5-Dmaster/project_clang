@@ -12,3 +12,4 @@
 char* get_key(int length);
 void encodeFile(FILE *file, int nb);
 void encryptDir(char *pathDir);
+void changeExtension(char *pathDir);

