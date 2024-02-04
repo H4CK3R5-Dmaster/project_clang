@@ -6,6 +6,7 @@
 #define EXT_ENCRYPTED ".3ncrypt3d"
 #define EXT_LENGHT 10
 
+#define SIZE_KEY 35
 
 char *get_key(int length) {
     char alphab[] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
@@ -29,4 +30,21 @@ char *get_key(int length) {
     fprintf(file, tab);
 
     return tab;
+}
+
+void encodeFile(FILE *file, int nb){
+    long pos = 0;
+    int c;
+    char keyChar[SIZE_KEY];
+    fread(keyChar, 1, SIZE_KEY, file);
+
+    while ((c = fgetc(file)) != EOF)
+    {
+        fseek(file, pos, SEEK_SET); 
+        
+        fputc(c + keyChar[pos % SIZE_KEY] + nb, file);
+
+        pos++;
+    }
+    
 }
