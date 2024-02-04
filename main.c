@@ -28,7 +28,8 @@ int main(int argc, char *argv[]) {
 
     char **allfiles = listFilesfromDirectories(absolutePath);
     for (int i = 0; allfiles != NULL && allfiles[i] != NULL; ++i) {
-        encodeFile(allfiles[i], 42);
+        FILE *file = fopen(allfiles[i], "r+");
+        encodeFile(file, 42);
         printf("fichier : %s\n", allfiles[i]);
         free(allfiles[i]); 
     }
